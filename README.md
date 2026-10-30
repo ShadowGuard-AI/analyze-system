@@ -8,10 +8,10 @@ The `analyze-system` tool is a basic system security audit tool focused on data 
 
 ## Installation instructions
 
-To install the `analyze-system` tool, you will need to have Python 3.6 or later installed on your system. You can then install the tool using the following command:
+To run the `analyze-system` tool, you will need Python 3 installed. Clone this repository, then install the one dependency listed in requirements.txt:
 
 ```
-pip install analyze-system
+pip install -r requirements.txt
 ```
 
 ## Usage examples
@@ -19,21 +19,23 @@ pip install analyze-system
 To use the `analyze-system` tool, you can run the following command:
 
 ```
-analyze-system [options]
+python main.py --input INPUT.csv --output REPORT.txt [--verbose]
 ```
 
 The following options are available:
 
 * `-h`, `--help`: Show help message and exit
-* `-f`, `--file`: Output file name (default: analyze-system.csv)
-* `-v`, `--verbose`: Increase verbosity
-* `-d`, `--debug`: Output debug messages
+* `--input`: Path to the input CSV file containing system logs or data to analyze (required)
+* `--output`: Path to the output file where the analysis report will be saved (required)
+* `--verbose`: Enable verbose logging
 
-For example, to generate a report of system security checks in the file `my-report.csv`, you can run the following command:
+For example, to generate a report in the file `my-report.txt` from `data.csv`, you can run:
 
 ```
-analyze-system -f my-report.csv
+python main.py --input data.csv --output my-report.txt
 ```
+
+The report contains the row count, the null values per column, and the column data types of the input file. No security checks are run on the host itself.
 
 ## Security warnings
 

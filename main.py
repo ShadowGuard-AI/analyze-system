@@ -45,6 +45,9 @@ def analyze_data(input_file, output_file):
         data = pd.read_csv(input_file)
 
         logging.info("Performing data analysis...")
+        # The summary is descriptive statistics only: row count, nulls per
+        # column, and dtypes. Despite the report title, no security check
+        # runs here, so a clean report says nothing about the host itself.
         summary = {
             "Total Rows": len(data),
             "Null Values": data.isnull().sum().to_dict(),
