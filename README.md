@@ -4,7 +4,7 @@
 
 ## Project description
 
-The `analyze-system` tool is a basic system security audit tool focused on data analysis and reporting. It provides a command-line interface to perform various system security checks and generate reports.
+The `analyze-system` tool is a CSV summary reporter focused on data analysis and reporting. It provides a command-line interface that reads a CSV file and writes a summary report with the row count, the null values per column, and the column data types.
 
 ## Installation instructions
 
@@ -39,7 +39,7 @@ The report contains the row count, the null values per column, and the column da
 
 ## Security warnings
 
-The `analyze-system` tool should not be used as a replacement for a full-fledged security audit. It is only intended to provide a basic overview of the security status of a system.
+The `analyze-system` tool is not a security audit tool and runs no security checks. Its report is a summary of the input CSV only: row count, null values per column, and column data types. It says nothing about the security status of a system.
 
 ## License
 

@@ -11,7 +11,7 @@ def setup_argparse():
     Sets up the command-line interface.
     """
     parser = argparse.ArgumentParser(
-        description="Analyze-system: A basic system security audit tool focused on data analysis and reporting."
+        description="Analyze-system: A CSV summary reporter focused on data analysis and reporting."
     )
     parser.add_argument(
         "--input",
@@ -46,8 +46,8 @@ def analyze_data(input_file, output_file):
 
         logging.info("Performing data analysis...")
         # The summary is descriptive statistics only: row count, nulls per
-        # column, and dtypes. Despite the report title, no security check
-        # runs here, so a clean report says nothing about the host itself.
+        # column, and dtypes. No security check runs here, so the report
+        # says nothing about the security of the host itself.
         summary = {
             "Total Rows": len(data),
             "Null Values": data.isnull().sum().to_dict(),
@@ -56,8 +56,8 @@ def analyze_data(input_file, output_file):
 
         logging.info("Writing analysis report to output file...")
         with open(output_file, "w") as f:
-            f.write("System Security Audit Report\n")
-            f.write("============================\n")
+            f.write("CSV Summary Report\n")
+            f.write("==================\n")
             for key, value in summary.items():
                 f.write(f"{key}: {value}\n")
 
