@@ -50,11 +50,21 @@ def analyze_data(input_file, output_file):
         # says nothing about the security of the host itself.
         summary = {
             "Total Rows": len(data),
+            # Null here is pandas' reading, not the file's literal
+            # content: read_csv treats strings like NA and null as
+            # missing by default, so a column honestly full of the
+            # text NA reports as entirely null, while a column of
+            # spaces reports as fully present.
             "Null Values": data.isnull().sum().to_dict(),
             "Column Data Types": data.dtypes.to_dict()
         }
 
         logging.info("Writing analysis report to output file...")
+        # Nothing stops the output path being the input path. The read
+        # has already finished, so the run succeeds and the source CSV
+        # is replaced by its own summary. I note it rather than guard
+        # it in a comment pass; a caller who wants that overwrite gets
+        # it, and a caller who typos it loses the original file.
         with open(output_file, "w") as f:
             f.write("CSV Summary Report\n")
             f.write("==================\n")
