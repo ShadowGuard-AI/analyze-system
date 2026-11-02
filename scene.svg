@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="The slipway in three bands: surf reaching and falling back in the far band, a wet sheen climbing the rails sleeper by sleeper in the middle band while the housed boat stands still, and the winch cable and shingle stirring in the near band">
+<rect x="0" y="0" width="1200" height="300" fill="#e9e2cf"/>
+<rect x="0" y="0" width="1200" height="96" fill="#cfd8dc"/>
+<g stroke="#5a6066" stroke-width="3" fill="none"><g><animateTransform attributeName="transform" type="translate" values="0,0; 130,4; 260,0" dur="26s" repeatCount="indefinite"/><path d="M120 44 q10 -9 20 0 q10 -9 20 0"/><path d="M330 30 q9 -8 18 0 q9 -8 18 0"/></g></g>
+<rect x="760" y="70" width="440" height="90" fill="#6e8378"/>
+<g stroke="#eef0e8" stroke-width="4"><line x1="800" y1="104" x2="1010" y2="100"><animate attributeName="opacity" values="0.25;0.9;0.25" dur="5s" repeatCount="indefinite"/></line><line x1="830" y1="128" x2="1080" y2="124"><animate attributeName="opacity" values="0.9;0.25;0.9" dur="7s" repeatCount="indefinite"/></line><line x1="860" y1="148" x2="1120" y2="146"><animate attributeName="opacity" values="0.25;0.9;0.25" dur="6s" repeatCount="indefinite"/></line></g>
+<rect x="120" y="26" width="330" height="134" fill="#d6cdb8"/>
+<polygon points="104,26 466,26 420,-8 150,-8" fill="#564a3c"/>
+<rect x="120" y="22" width="330" height="14" fill="#27506e"/>
+<polygon points="176,44 236,44 220,160 160,160" fill="#463e34"/><polygon points="334,44 394,44 410,160 350,160" fill="#463e34"/>
+<rect x="236" y="44" width="98" height="116" fill="#181a1c"/>
+<polygon points="300,74 336,110 326,148 262,148 254,110" fill="#27506e"/><polygon points="258,112 330,112 326,128 262,128" fill="#f2ead8"/>
+<polygon points="470,300 556,160 574,160 540,300" fill="#a63a2b"/><polygon points="210,300 296,160 278,160 140,300" fill="#a63a2b"/>
+<g fill="#947854"><rect x="252" y="252" width="330" height="10"/><rect x="276" y="222" width="282" height="9"/><rect x="298" y="194" width="238" height="8"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="0,52; 0,-96" dur="9s" repeatCount="indefinite"/><rect x="392" y="196" width="52" height="10" fill="#ffffff" opacity="0.55"><animate attributeName="opacity" values="0;0.6;0.6;0" dur="9s" repeatCount="indefinite"/></rect></g>
+<line x1="417" y1="160" x2="452" y2="286" stroke="#f2ead8" stroke-width="3"><animate attributeName="x2" values="452;456;452" dur="9s" repeatCount="indefinite"/></line>
+<g fill="#8a7a5e"><ellipse cx="90" cy="278" rx="16" ry="8"><animate attributeName="opacity" values="0.6;1;0.6" dur="5s" repeatCount="indefinite"/></ellipse><ellipse cx="700" cy="284" rx="18" ry="9"><animate attributeName="opacity" values="1;0.6;1" dur="7s" repeatCount="indefinite"/></ellipse><ellipse cx="980" cy="272" rx="14" ry="7"><animate attributeName="opacity" values="0.6;1;0.6" dur="6s" repeatCount="indefinite"/></ellipse></g>
+</svg>

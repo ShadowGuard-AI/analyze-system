@@ -1,10 +1,29 @@
-![Banner](banner.png)
+![The lifeboat station slipway: rails climbing from wet shingle to open boathouse doors, a lifeboat waiting in shadow, nothing readable](intro-banner.png)
 
 # analyze-system
+
+![The boathouse with open doors and the name painted in sail cream on the harbor blue lintel board above them](banner.png)
+
+![Slipway rails converging to a harbor blue hull curve above a sail cream winch cable, over the station nameboard](logo.png)
+
+![The slipway in three bands: surf falling back, a wet sheen climbing the rails, the winch cable stirring in the foreground](scene.svg)
+
+
+# analyze-system
+
+
+![Major section divider](sep-heavy.svg)
+
+> Flare post notice: this tool runs no security checks despite its name. It reads a CSV file and reports a count, nothing more.
+
+> Flare post notice: both --input and --output are required for every run. One names the CSV to read, the other names the report file to write.
 
 ## Project description
 
 The `analyze-system` tool is a CSV summary reporter focused on data analysis and reporting. It provides a command-line interface that reads a CSV file and writes a summary report with the row count, the null values per column, and the column data types.
+
+
+![Major section divider](sep-heavy.svg)
 
 ## Installation instructions
 
@@ -13,6 +32,9 @@ To run the `analyze-system` tool, you will need Python 3 installed. Clone this r
 ```
 pip install -r requirements.txt
 ```
+
+
+![Major section divider](sep-heavy.svg)
 
 ## Usage examples
 
@@ -37,9 +59,15 @@ python main.py --input data.csv --output my-report.txt
 
 The report contains the row count, the null values per column, and the column data types of the input file. No security checks are run on the host itself.
 
+
+![Major section divider](sep-heavy.svg)
+
 ## Security warnings
 
 The `analyze-system` tool is not a security audit tool and runs no security checks. Its report is a summary of the input CSV only: row count, null values per column, and column data types. It says nothing about the security status of a system.
+
+
+![Major section divider](sep-heavy.svg)
 
 ## License
 
