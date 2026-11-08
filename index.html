@@ -3,93 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>analyze-system: The Lifeboat Station Slipway</title>
-<meta name="description" content="analyze-system reads a CSV file and writes a summary report giving the row count, the null values per column, and the column data types. It is not a security audit tool.">
+<title>analyze-system: The Frame Census</title>
 <style>
-@font-face{font-family:'BBH Hegarty';src:url('fonts/BBH-Hegarty.ttf') format('truetype');}
-@font-face{font-family:'Barlow';src:url('fonts/Barlow.ttf') format('truetype');}
-:root{--blue:#27506e;--rust:#a63a2b;--tan:#c8a878;--cream:#f2ead8;--sea:#6e8378;--ink:#22303a}
-*{box-sizing:border-box}body{margin:0;background:var(--blue);color:var(--ink);font-family:'Barlow',sans-serif;line-height:1.65}
-h1,h2,h3{font-family:'BBH Hegarty',sans-serif}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;background:var(--blue);border-left:14px solid var(--rust);box-shadow:inset 22px 0 0 -8px var(--rust)}
-.hero img.heroimg{width:100%;height:60vh;object-fit:cover;display:block}
-.hero .in{padding:1rem 6vw 2rem;max-width:1080px;margin:0 auto;width:100%;color:var(--cream)}
-.logo{width:180px;border-radius:8px}
-.rails{border-left:14px solid var(--rust);box-shadow:inset 22px 0 0 -8px var(--rust)}
-main{padding:0 6vw 3rem;max-width:1080px;margin:0 auto}
-nav{display:flex;gap:.9rem;flex-wrap:wrap;margin:1rem 0}
-.carriage{display:inline-block;text-decoration:none;color:var(--cream);font-family:'BBH Hegarty',sans-serif;padding:.7rem 1.3rem;background:linear-gradient(to bottom,var(--rust) 0 62%,var(--tan) 62%);border-bottom:8px solid #8a6f45;transition:transform .12s,filter .15s}
-.carriage:hover{filter:brightness(1.25)}
-.carriage:active{transform:translateY(6px)}
-.carriage:focus-visible{outline:3px solid var(--cream);outline-offset:3px;border-radius:40% 40% 12px 12px}
-.tide{background:var(--cream);padding:0 1.5rem 1.3rem;margin:1.8rem 0;position:relative;background-image:repeating-linear-gradient(to bottom,transparent 0 30px,rgba(200,168,120,.35) 30px 31px)}
-.tide:before,.tide:after{content:'';position:absolute;top:-12px;width:10px;height:18px;border:3px solid #8a8a84;border-bottom:none;border-radius:8px 8px 0 0}
-.tide:before{left:26px}.tide:after{right:26px}
-.tide h2{color:var(--blue);border-bottom:3px solid var(--rust);padding-bottom:.35rem}
-pre{background:#1d3444;color:var(--cream);padding:1rem;overflow-x:auto}
-a{color:#7c2d20}a:before{content:'';display:inline-block;width:9px;height:16px;margin-right:.5em;vertical-align:-3px;background:var(--tan);border-radius:45% 45% 0 0;border:1px solid #8a6f45}
-a:hover:before{background:var(--rust)}
-.carriage:before{content:none}
-.sleepers{margin:2.2rem 0;border-top:7px solid var(--rust);border-bottom:7px solid var(--rust);height:26px;background:repeating-linear-gradient(to right,var(--tan) 0 44px,transparent 44px 150px)}
-.sleepers i{display:block;height:100%;background:repeating-linear-gradient(to right,transparent 0 44px,transparent 44px 150px)}
-.stop{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(39,80,110,.25)}
-.stop b{font-family:'BBH Hegarty',sans-serif;min-width:110px;color:var(--blue)}
-.notice{background:#fffaf0;border-left:14px solid var(--rust);padding:.2rem 1.3rem 1rem;margin:1.4rem 0}
-.notice h3{font-family:'BBH Hegarty',sans-serif;color:var(--blue)}
-footer{padding:1rem 6vw 2.4rem;max-width:1080px;margin:0 auto;color:var(--cream)}
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-400.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Inclusive Sans'; src: url('fonts/InclusiveSans-400.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Inclusive Sans'; src: url('fonts/InclusiveSans-700.woff2') format('woff2'); font-weight: 700; }
+:root { --wax: #b8860b; --pine: #6d4c2f; --smoke: #5b564d; --strap: #c23b2a; --paper: #faf6ec; --ink: #2c2618; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inclusive Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+header.top { display: flex; justify-content: space-between; align-items: center; padding: 16px 28px; background: var(--pine); color: #f3e9d2; border-bottom: 5px solid var(--wax); }
+.wordmark { font-weight: 700; letter-spacing: .03em; }
+.flake { color: #eec95c; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+.hero { text-align: center; padding: 50px 22px 8px; }
+.hero img.logo { width: 300px; max-width: 80%; height: auto; border: 5px solid var(--pine); }
+h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2.6rem; margin: 18px 0 6px; color: var(--pine); }
+h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.7rem; color: var(--pine); border-bottom: 3px solid #e2d5ae; padding-bottom: 5px; margin-top: 38px; }
+.tag { max-width: 43rem; margin: 0 auto; }
+.buttons { margin: 22px 0 6px; }
+.buttons a { display: inline-block; margin: 4px; padding: 11px 22px; background: var(--wax); color: #fff; font-weight: 700; text-decoration: none; border-radius: 4px; }
+.buttons a.alt { background: transparent; color: var(--pine); border: 2px solid var(--pine); }
+figure.wide { max-width: 1020px; margin: 24px auto; padding: 0 18px; }
+figure.wide img { width: 100%; height: auto; display: block; border: 1px solid #e2d5ae; }
+figcaption { color: var(--smoke); font-size: .9rem; padding-top: 8px; text-align: center; }
+.strip { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; padding: 20px 18px; }
+.strip div { background: #fff; border: 1px solid #e2d5ae; border-top: 4px solid var(--strap); padding: 13px 18px; min-width: 180px; text-align: center; }
+.strip b { display: block; font-family: 'Instrument Serif', serif; font-weight: 400; color: var(--pine); font-size: 1.1rem; }
+main { max-width: 880px; margin: 0 auto; padding: 8px 22px 30px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #e2d5ae; padding: 8px 12px; text-align: left; vertical-align: top; }
+th { background: var(--pine); color: #f3e9d2; }
+code { background: #efe6cb; padding: 1px 6px; border-radius: 3px; }
+.hold { border-left: 5px solid var(--strap); background: #f7ecd9; padding: 13px 18px; }
+footer { text-align: center; padding: 24px 18px 32px; color: var(--smoke); font-size: .9rem; border-top: 5px solid var(--wax); margin-top: 28px; }
 </style>
 </head>
 <body>
-<div class="rails">
-<header class="hero">
-<img class="heroimg" src="assets/intro-banner.png" alt="The lifeboat station slipway: rails climbing from wet shingle to open boathouse doors, a lifeboat waiting in shadow, no text">
-<div class="in">
-<img class="logo" src="assets/logo.png" alt="Slipway rails converging to a harbor blue hull curve over a winch cable and the station nameboard">
-<h1>analyze-system</h1>
-<p>The station launch board turned sideways. Each section rides the margin rails to its own stop.</p>
-<nav>
-<a class="carriage" href="#does">First stop</a>
-<a class="carriage" href="#ready">Getting ready</a>
-<a class="carriage" href="#run">The run</a>
-<a class="carriage" href="#controls">Four controls</a>
-<a class="carriage" href="#close">Outcome and licence</a>
-</nav>
+<header class="top"><span class="wordmark">analyze-system</span><span class="flake">Counted cell by cell</span></header>
+<section class="hero">
+<img class="logo" src="assets/logo.png" alt="Wooden honeycomb frame held up to the light, its wax cells in three kinds across the frame: dark capped cells, open cells of amber honey, and a patch of pale empty cells">
+<h1>The Frame Census</h1>
+<p class="tag">A CSV summary reporter. It reads a CSV file and writes a summary report with the row count, the null values per column, and the column data types. Like a frame held to the light, the file is read cell by cell: what is filled, what is empty, and what kind each column is, and nothing beyond that census.</p>
+<p class="buttons"><a href="https://github.com/ShadowGuard-AI/analyze-system">View on GitHub</a> <a class="alt" href="https://github.com/ShadowGuard-AI/analyze-system#readme">Read the README</a></p>
+</section>
+<figure class="wide"><img src="assets/intro-banner.png" alt="Honeycomb frame close up tilted to the light, the empty cells showing as a plain pale patch among the capped and open cells around them"><figcaption>The frame close up: the empty cells show as a pale patch among the capped and open cells.</figcaption></figure>
+<div class="strip">
+<div><b>Row count</b>of the input file</div>
+<div><b>Null values</b>counted per column</div>
+<div><b>Column types</b>named for each column</div>
+<div><b>pandas</b>the one requirement</div>
 </div>
-</header>
 <main>
-<section class="tide" id="does"><h2>First stop: what the tool actually does</h2>
-<p>analyze-system reads a CSV file and writes a summary report giving the row count, the null values per column, and the column data types. The source classes it under data analysis and reporting.</p>
-<div class="notice"><h3>Read this at full size</h3>
-<p>This is not a security audit tool, it runs no security checks on a host, and its report says nothing about the security status of any system. The name promises more than the work, and the source itself insists on this correction.</p></div>
-</section>
-<div class="sleepers"></div>
-<section class="tide" id="ready"><h2>Second stop: getting it ready</h2>
-<p>Python 3 is required, the repository is cloned, and the one dependency listed in requirements.txt is installed with this line, printed exactly as the source gives it:</p>
-<pre>pip install -r requirements.txt</pre>
-<p>Two gaps are stated openly, as the source leaves them: the source names no dependency by name, and it gives no clone address. The page leaves the dependency unnamed rather than guessing at a library.</p>
-</section>
-<div class="sleepers"></div>
-<section class="tide" id="run"><h2>Third stop: the run itself</h2>
-<p>A worked example, set on the board as the source gives it:</p>
-<pre>python main.py --input data.csv --output my-report.txt</pre>
-<p>That run produces a report in my-report.txt drawn from data.csv. The general form is:</p>
-<pre>python main.py --input INPUT.csv --output REPORT.txt [--verbose]</pre>
-</section>
-<div class="sleepers"></div>
-<section class="tide" id="controls"><h2>Fourth stop: the four controls</h2>
-<div class="stop"><b>-h, --help</b><span>Show the help message and exit.</span></div>
-<div class="stop"><b>--input</b><span>Path to the input CSV file. Required.</span></div>
-<div class="stop"><b>--output</b><span>Path where the report will be saved. Required.</span></div>
-<div class="stop"><b>--verbose</b><span>Turns on verbose logging.</span></div>
-</section>
-<div class="sleepers"></div>
-<section class="tide" id="close"><h2>Closing stop: outcome and licence</h2>
-<p>The report holds the row count, the null values per column, and the column data types of the input file, nothing more.</p>
-<p>The tool is licensed under the GNU General Public License v3.0, licensed to CY83R-3X71NC710N, reproduced as the source states it.</p>
-<p><a href="https://github.com/ShadowGuard-AI/analyze-system">The repository on GitHub</a></p>
-</section>
+<h2>What it does</h2>
+<p>The tool provides a command-line interface that reads a CSV file and writes a summary report. Run it as the README gives it: <code>python main.py --input INPUT.csv --output REPORT.txt [--verbose]</code>. For example, <code>python main.py --input data.csv --output my-report.txt</code> generates the report in <code>my-report.txt</code> from <code>data.csv</code>. Its one dependency, listed in requirements.txt, is pandas.</p>
+<figure class="wide" style="padding:0;margin:18px 0;"><img src="assets/banner.png" alt="Apiary in flat daylight with a beekeeper holding one honeycomb frame up at the centre, rows of hive boxes standing in order behind with one red strap across the nearest box and further frames leaning at the bench"></figure>
+<h2>Parameters</h2>
+<table>
+<tr><th>Parameter</th><th>What the README says</th></tr>
+<tr><td><code>-h</code>, <code>--help</code></td><td>Show help message and exit</td></tr>
+<tr><td><code>--input</code></td><td>Path to the input CSV file containing system logs or data to analyze (required)</td></tr>
+<tr><td><code>--output</code></td><td>Path to the output file where the analysis report will be saved (required)</td></tr>
+<tr><td><code>--verbose</code></td><td>Enable verbose logging</td></tr>
+</table>
+<h2>Stated limits</h2>
+<div class="hold"><p>Both <code>--input</code> and <code>--output</code> are required for every run: one names the CSV to read, the other names the report file to write. The README states its scope plainly: this tool runs no security checks despite its name. It reads a CSV file and reports a count, nothing more. The analyze-system tool is not a security audit tool and runs no security checks. Its report is a summary of the input CSV only: row count, null values per column, and column data types. It says nothing about the security status of a system. Licensed under the GNU General Public License v3.0.</p></div>
 </main>
-<footer><p>Theme: the lifeboat station slipway. Type: BBH Hegarty for headings, Barlow for reading, both SIL Open Font License 1.1. No lettering reference was recorded for this project.</p></footer>
-</div>
+<footer>analyze-system, counted and reported. Fonts: Instrument Serif and Inclusive Sans, self-hosted under the SIL Open Font License.</footer>
 </body>
 </html>
