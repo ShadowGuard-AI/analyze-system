@@ -1,10 +1,10 @@
-![The lifeboat station slipway: rails climbing from wet shingle to open boathouse doors, a lifeboat waiting in shadow, nothing readable](intro-banner.png)
+![Honeycomb frame close up tilted to the light, the empty cells showing as a plain pale patch among the capped and open cells around them](intro-banner.png)
 
 # analyze-system
 
-![The boathouse with open doors and the name painted in sail cream on the harbor blue lintel board above them](banner.png)
+![Apiary in flat daylight with a beekeeper holding one honeycomb frame up at the centre, rows of hive boxes standing in order behind with one red strap across the nearest box and further frames leaning at the bench](banner.png)
 
-![Slipway rails converging to a harbor blue hull curve above a sail cream winch cable, over the station nameboard](logo.png)
+![Wooden honeycomb frame held up to the light, its wax cells in three kinds across the frame: dark capped cells, open cells of amber honey, and a patch of pale empty cells](logo.png)
 
 ![The slipway in three bands: surf falling back, a wet sheen climbing the rails, the winch cable stirring in the foreground](scene.svg)
 
