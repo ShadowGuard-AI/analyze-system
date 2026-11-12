@@ -1,0 +1,100 @@
+import pandas as pd
+import argparse
+import logging
+import sys
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def setup_argparse():
+    """
+    Sets up the command-line interface.
+    """
+    parser = argparse.ArgumentParser(
+        description="Analyze-system: A CSV summary reporter focused on data analysis and reporting."
+    )
+    parser.add_argument(
+        "--input",
+        type=str,
+        required=True,
+        help="Path to the input CSV file containing system logs or data to analyze."
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        required=True,
+        help="Path to the output file where the analysis report will be saved."
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Enable verbose logging."
+    )
+    return parser
+
+def analyze_data(input_file, output_file):
+    """
+    Core functionality to analyze system data from a CSV file and generate a report.
+
+    Args:
+        input_file (str): Path to the input CSV file.
+        output_file (str): Path to save the output report.
+    """
+    try:
+        logging.info("Reading input CSV file...")
+        data = pd.read_csv(input_file)
+
+        logging.info("Performing data analysis...")
+        # The summary is descriptive statistics only: row count, nulls per
+        # column, and dtypes. No security check runs here, so the report
+        # says nothing about the security of the host itself.
+        summary = {
+            "Total Rows": len(data),
+            # Null here is pandas' reading, not the file's literal
+            # content: read_csv treats strings like NA and null as
+            # missing by default, so a column honestly full of the
+            # text NA reports as entirely null, while a column of
+            # spaces reports as fully present.
+            "Null Values": data.isnull().sum().to_dict(),
+            "Column Data Types": data.dtypes.to_dict()
+        }
+
+        logging.info("Writing analysis report to output file...")
+        # Nothing stops the output path being the input path. The read
+        # has already finished, so the run succeeds and the source CSV
+        # is replaced by its own summary. I note it rather than guard
+        # it in a comment pass; a caller who wants that overwrite gets
+        # it, and a caller who typos it loses the original file.
+        with open(output_file, "w") as f:
+            f.write("CSV Summary Report\n")
+            f.write("==================\n")
+            for key, value in summary.items():
+                f.write(f"{key}: {value}\n")
+
+        logging.info("Analysis complete. Report saved successfully.")
+    
+    except FileNotFoundError:
+        logging.error(f"File not found: {input_file}")
+        sys.exit(1)
+    except pd.errors.EmptyDataError:
+        logging.error("Input file is empty or corrupt.")
+        sys.exit(1)
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
+        sys.exit(1)
+
+def main():
+    """
+    Main entry point for the tool.
+    """
+    parser = setup_argparse()
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+
+    logging.info("Starting analyze-system tool...")
+    analyze_data(args.input, args.output)
+
+if __name__ == "__main__":
+    main()
